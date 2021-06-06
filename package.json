@@ -34,9 +34,11 @@
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "emojilib": "^3.0.2",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "flexsearch": "^0.6.32",
     "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "intersection-observer": "^0.12.0",
@@ -50,6 +52,8 @@
     "svelte": "3.35.0",
     "svelte-preprocess": "^4.6.9",
     "tslib": "^2.2.0",
-    "typescript": "^4.3.2"
+    "twemoji": "^13.1.0",
+    "typescript": "^4.3.2",
+    "unicode-emoji-json": "^0.2.1"
   }
 }

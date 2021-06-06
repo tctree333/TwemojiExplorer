@@ -1,6 +1,17 @@
-<script>
+<script lang="ts">
   import Header from '../../components/Header.svelte';
   import Head from '../../components/Head.svelte';
+  import SearchBar from '../../components/SearchBar.svelte';
+  import Section from '../../components/Section.svelte';
+  import type { EmojiData, SearchEmojiData } from '../../lib/types';
+
+  export let data: {
+    fullEmojiData: {
+      group: string;
+      emojis: EmojiData[];
+    }[];
+    searchData: SearchEmojiData[];
+  };
 </script>
 
 <style>
@@ -8,9 +19,6 @@
     max-width: 88rem;
     margin: 1rem auto;
     padding: 2rem;
-  }
-  p {
-    font-size: 1.5rem;
   }
 </style>
 
@@ -21,4 +29,10 @@
 
 <Header />
 
-<main><p>hello</p></main>
+<main>
+  <SearchBar hydrate-client={{ searchData: data.searchData }} />
+
+  {#each data.fullEmojiData as group}
+    <Section hydrate-client={{ title: group.group, emojis: group.emojis }} />
+  {/each}
+</main>
