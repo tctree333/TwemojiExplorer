@@ -26,14 +26,14 @@
 
     font-size: 1.5rem;
 
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.15s;
   }
   img {
     display: block;
     margin-right: 0.75rem;
   }
   a:hover {
-    box-shadow: 0 0 #0000, 0 0 #0000, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 </style>
 

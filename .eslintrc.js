@@ -7,7 +7,7 @@ module.exports = {
   },
   plugins: ['prettier'],
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-
+  sourceType: 'module',
   rules: {
     'prettier/prettier': 'error',
     semi: ['error', 'always'],
