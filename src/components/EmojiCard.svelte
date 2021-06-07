@@ -11,7 +11,7 @@
     align-items: center;
 
     height: 132px;
-    background-color: hsl(0deg, 0%, 80%);
+    background-color: hsl(0deg, 0%, 85%);
     border-radius: 0.5rem;
   }
   a {

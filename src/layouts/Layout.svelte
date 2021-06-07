@@ -11,8 +11,9 @@
 
     padding: 4rem 1rem;
     width: 100%;
+    background-color: hsl(0deg 0% 95%);
 
-    background-color: hsl(0deg 0% 90%);
+    font-size: 1.25rem;
   }
   footer a {
     text-decoration: underline;
