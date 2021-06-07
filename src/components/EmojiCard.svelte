@@ -55,6 +55,7 @@
 
 <style>
   div {
+    isolation: isolate;
     position: relative;
 
     display: flex;

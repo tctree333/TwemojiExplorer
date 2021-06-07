@@ -16,9 +16,13 @@
 
 <style>
   div {
+    isolation: isolate;
+
     max-width: 88rem;
     padding: 0 2rem;
     margin: 0 auto;
+
+    overflow-x: hidden;
   }
 </style>
 

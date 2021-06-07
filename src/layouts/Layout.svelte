@@ -6,16 +6,20 @@
 <style>
   footer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
     padding: 4rem 1rem;
     width: 100%;
-    background-color: hsl(0deg 0% 95%);
+    background-color: hsl(0, 0% 95%);
 
     font-size: 1.25rem;
   }
-  footer a {
+  p {
+    margin-bottom: 0.5rem;
+  }
+  a {
     text-decoration: underline;
   }
 </style>
@@ -24,4 +28,5 @@
 
 <footer>
   <p>A web project by <a href="https://tomichen.com">Tomi Chen.</a></p>
+  <p>Open Source on <a href="https://github.com/tctree333/TwemojiExplorer">GitHub</a></p>
 </footer>

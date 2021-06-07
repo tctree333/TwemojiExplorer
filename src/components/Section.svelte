@@ -10,10 +10,12 @@
 
 <style>
   section {
+    isolation: isolate;
+
     margin: 0.5rem -2.5rem;
     padding: 0.75rem 2.5rem 4rem;
 
-    border-bottom: 2px solid hsl(0deg, 0%, 90%);
+    border-bottom: 2px solid hsl(0, 0%, 90%);
   }
   h2 {
     font-size: 2.5rem;

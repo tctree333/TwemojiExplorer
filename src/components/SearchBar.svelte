@@ -38,6 +38,9 @@
 
 <style>
   :global(div.searchbar-component) {
+    isolation: isolate;
+    z-index: 10;
+
     position: sticky;
     top: 0;
     background-color: hsl(0, 0%, 100%);
