@@ -1,3 +1,10 @@
+<script context="module" lang="ts">
+  import { writable } from 'svelte/store';
+  import type { Writable } from 'svelte/store';
+
+  let currentActive: Writable<string> = writable(null);
+</script>
+
 <script lang="ts">
   import { onDestroy } from 'svelte';
 
@@ -51,6 +58,10 @@
   onDestroy(() => {
     clearTimeout(timeoutHandle);
   });
+
+  function show() {
+    currentActive.set(emoji.slug);
+  }
 </script>
 
 <style>
@@ -85,17 +96,13 @@
     left: 0;
     right: 0;
 
-    display: none;
     background-color: transparent;
-  }
-  div.wrapper:hover div.actions {
-    display: block;
   }
   button {
     margin-bottom: 0.5rem;
   }
   button,
-  a {
+  a.button {
     display: block;
     width: 100%;
 
@@ -109,12 +116,20 @@
 
 <div
   class="wrapper"
-  style={status !== null ? `background-color: ${status ? 'hsl(110, 66%, 81%)' : 'hsl(0, 62%, 90%)'}` : ''}>
-  <img alt={emoji.emoji} src={emoji.path} width="42" height="42" loading="lazy" />
+  style={status !== null ? `background-color: ${status ? 'hsl(110, 66%, 81%)' : 'hsl(0, 62%, 90%)'}` : ''}
+  on:mouseover={show}
+  on:mouseleave={() => {
+    currentActive.set(null);
+  }}
+  on:click={show}>
+  <a href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}"
+    ><img alt={emoji.emoji} src={emoji.path} width="42" height="42" loading="lazy" /></a>
   <p>{emoji.slug.replace(/_/g, ' ')}</p>
-  <div class="actions">
-    <button on:click={copySvg}>Copy SVG</button>
-    <button on:click={copyCodepoint}>Copy Codepoint</button>
-    <a href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}">Emojipedia</a>
-  </div>
+  {#if $currentActive === emoji.slug}
+    <div class="actions">
+      <button on:click={copySvg}>Copy SVG</button>
+      <button on:click={copyCodepoint}>Copy Codepoint</button>
+      <a class="button" href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}">Emojipedia</a>
+    </div>
+  {/if}
 </div>
