@@ -22,7 +22,7 @@ module.exports = {
           return {
             emoji: obj.emoji,
             slug: obj.slug,
-            codepoint: codepoint.replaceAll('-', ' '),
+            codepoint: codepoint.replace(/-/g, ' '),
             path: `/twemoji/svg/${codepoint}.svg`,
           };
         }),
