@@ -89,4 +89,5 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
   <Favicons />
+  <script async defer data-domain="twemoji.tomichen.com" src="https://plausible.io/js/plausible.js"></script>
 </svelte:head>
