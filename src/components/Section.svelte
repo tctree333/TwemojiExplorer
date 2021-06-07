@@ -12,7 +12,8 @@
   section {
     margin: 0.5rem -2.5rem;
     padding: 0.75rem 2.5rem 4rem;
-
+  }
+  section:not(:last-child) {
     border-bottom: 2px solid hsl(0deg, 0%, 90%);
   }
   h2 {

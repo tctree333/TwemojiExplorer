@@ -8,10 +8,10 @@ module.exports = {
     const fullEmojiData = [];
     const searchData = [];
     for (const group in emojiData) {
-      fullEmojiData.push({ group, emojis: emojiData[group] });
+      fullEmojiData.push({ group, emojis: emojiData[group].map((obj) => ({ emoji: obj.emoji, slug: obj.slug })) });
     }
     for (const emoji in emojiKeywords) {
-      searchData.push({ emoji, keywords: emojiKeywords[emoji] });
+      searchData.push({ emoji: emoji, keywords: emojiKeywords[emoji] });
     }
     return {
       fullEmojiData,
