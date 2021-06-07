@@ -6,6 +6,8 @@
 
   export let title: string;
   export let emojis: EmojiData[];
+
+  $: emojilist = !$displayItems ? emojis : emojis.filter((emoji) => $displayItems[emoji.emoji] !== undefined);
 </script>
 
 <style>
@@ -24,13 +26,13 @@
   }
 </style>
 
-<section>
-  <h2>{title}</h2>
-  <Grid>
-    {#each emojis as emoji}
-      {#if !$displayItems || $displayItems[emoji.emoji] !== undefined}
+{#if emojilist.length > 0}
+  <section>
+    <h2>{title} ({emojilist.length})</h2>
+    <Grid>
+      {#each emojilist as emoji}
         <Card {emoji} />
-      {/if}
-    {/each}
-  </Grid>
-</section>
+      {/each}
+    </Grid>
+  </section>
+{/if}
