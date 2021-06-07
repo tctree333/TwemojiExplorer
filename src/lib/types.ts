@@ -1,5 +1,7 @@
 export interface EmojiData {
   emoji: string;
+  codepoint: string;
+  path: string;
   // skin_tone_support: boolean;
   // name: string;
   slug: string;
