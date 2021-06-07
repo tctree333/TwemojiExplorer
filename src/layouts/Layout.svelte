@@ -4,10 +4,6 @@
 </script>
 
 <style>
-  div {
-    min-height: 100%;
-  }
-
   footer {
     display: flex;
     justify-content: center;
@@ -23,9 +19,7 @@
   }
 </style>
 
-<div>
-  {@html templateHtml}
-</div>
+{@html templateHtml}
 
 <footer>
   <p>A web project by <a href="https://tomichen.com">Tomi Chen.</a></p>

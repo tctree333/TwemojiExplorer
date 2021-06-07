@@ -15,10 +15,10 @@
 </script>
 
 <style>
-  main {
+  div {
     max-width: 88rem;
-    margin: 1rem auto;
-    padding: 2rem;
+    padding: 0 2rem;
+    margin: 0 auto;
   }
 </style>
 
@@ -32,7 +32,9 @@
 <main>
   <SearchBar hydrate-client={{ searchData: data.searchData }} />
 
-  {#each data.fullEmojiData as group}
-    <Section hydrate-client={{ title: group.group, emojis: group.emojis }} />
-  {/each}
+  <div>
+    {#each data.fullEmojiData as group}
+      <Section hydrate-client={{ title: group.group, emojis: group.emojis }} />
+    {/each}
+  </div>
 </main>
