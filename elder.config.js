@@ -1,5 +1,5 @@
 module.exports = {
-  origin: 'localhost:3000', // TODO: update this.
+  origin: 'twemoji.tomichen.com', // TODO: update this.
   lang: 'en',
   srcDir: 'src',
   distDir: 'public',
