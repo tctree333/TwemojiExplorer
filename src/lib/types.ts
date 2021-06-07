@@ -12,5 +12,5 @@ export interface EmojiData {
 
 export interface SearchEmojiData {
   emoji: string;
-  keywords: string[];
+  keywords: string;
 }

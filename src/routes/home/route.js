@@ -29,7 +29,19 @@ module.exports = {
       });
     }
     for (const emoji in emojiKeywords) {
-      searchData.push({ emoji: emoji, keywords: emojiKeywords[emoji] });
+      const codepoint = twemoji
+        .parse(emoji, { buildUrl: (codepoint) => codepoint })
+        // see https://github.com/twitter/twemoji/issues/405
+        // temp workaround
+        .map((obj) => obj.url)
+        .filter((str) => !!str)
+        .join('-200d-');
+      searchData.push({
+        emoji: emoji,
+        keywords: JSON.stringify(emojiKeywords[emoji].concat([codepoint]))
+          .replace(/[\\\[\]'"]/g, '')
+          .replace(/[,_]/g, ' '),
+      });
     }
     return {
       fullEmojiData,

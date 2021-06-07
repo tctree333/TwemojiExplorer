@@ -17,14 +17,7 @@
       field: 'keywords',
     },
   });
-  index.add(
-    searchData.map((v) => ({
-      ...v,
-      keywords: JSON.stringify(v.keywords)
-        .replace(/[\\\[\]'"]/g, '')
-        .replace(/[,_]/g, ' '),
-    })),
-  );
+  index.add(searchData);
 
   let searchstring: string = '';
   function setResult(result: { [key: string]: boolean }) {
@@ -47,7 +40,7 @@
   :global(div.searchbar-component) {
     position: sticky;
     top: 0;
-    background-color: hsl(0deg, 0%, 100%);
+    background-color: hsl(0, 0%, 100%);
 
     margin-bottom: 1rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -76,7 +69,7 @@
     outline-offset: 2px;
   }
   input:focus-visible {
-    box-shadow: 4px 0 0 0 6px hsl(210deg, 70%, 70%);
+    box-shadow: 4px 0 0 0 6px hsl(210, 70%, 70%);
   }
 </style>
 
