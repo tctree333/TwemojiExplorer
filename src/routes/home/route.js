@@ -12,7 +12,13 @@ module.exports = {
       fullEmojiData.push({
         group,
         emojis: emojiData[group].map((obj) => {
-          const codepoint = twemoji.parse(obj.emoji, { buildUrl: (codepoint) => codepoint })[0].url;
+          const codepoint = twemoji
+            .parse(obj.emoji, { buildUrl: (codepoint) => codepoint })
+            // see https://github.com/twitter/twemoji/issues/405
+            // temp workaround
+            .map((obj) => obj.url)
+            .filter((str) => !!str)
+            .join('-200d-');
           return {
             emoji: obj.emoji,
             slug: obj.slug,
