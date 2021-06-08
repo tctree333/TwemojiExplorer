@@ -57,12 +57,12 @@
 <section>
   <h2>{title} ({emojis.length})</h2>
   <div class="grid">
-    {#each emojis.slice(0, showDefault) as emoji}
+    {#each emojis.slice(0, showDefault) as emoji (emoji.slug)}
       <Card {emoji} />
     {/each}
     {#if emojis.slice(showDefault).length > 0}
       {#if showAll}
-        {#each emojis.slice(showDefault) as emoji}
+        {#each emojis.slice(showDefault) as emoji (emoji.slug)}
           <Card {emoji} />
         {/each}
       {:else}
