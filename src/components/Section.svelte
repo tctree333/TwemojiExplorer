@@ -1,6 +1,5 @@
 <script lang="ts">
   import Card from './EmojiCard.svelte';
-  import Grid from './Grid.svelte';
   import type { EmojiData } from '../lib/types';
 
   export let title: string;
@@ -21,13 +20,18 @@
 
     margin-bottom: 1.5rem;
   }
+  div.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+    gap: 16px;
+  }
 </style>
 
 <section>
   <h2>{title} ({emojis.length})</h2>
-  <Grid>
+  <div class="grid">
     {#each emojis as emoji}
       <Card {emoji} />
     {/each}
-  </Grid>
+  </div>
 </section>
