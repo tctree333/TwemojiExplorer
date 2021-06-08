@@ -39,12 +39,18 @@
     });
   }
 
+  let debounceTimeout: NodeJS.Timeout;
   let searchstring: string = '';
   function setResult(result: GroupedEmojiData[]) {
     displayItems.set(result);
   }
 
-  $: searchstring ? search(searchstring, setResult) : setResult(null);
+  function handleInput() {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+      searchstring ? search(searchstring, setResult) : setResult(null);
+    }, 25);
+  }
 </script>
 
 <style>
@@ -105,7 +111,7 @@
           stroke-width="2"
           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
-      <input type="text" bind:value={searchstring} placeholder="Search Emojis!" />
+      <input type="text" bind:value={searchstring} on:input={handleInput} placeholder="Search Emojis!" />
     </label>
   </div>
 </div>
