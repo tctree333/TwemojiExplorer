@@ -2,15 +2,9 @@
   import Header from '../../components/Header.svelte';
   import Head from '../../components/Head.svelte';
   import Main from '../../components/Main.svelte';
-  import type { EmojiData, SearchEmojiData } from '../../lib/types';
+  import type { GroupedEmojiData } from '../../lib/types';
 
-  export let data: {
-    fullEmojiData: {
-      group: string;
-      emojis: EmojiData[];
-    }[];
-    searchData: SearchEmojiData[];
-  };
+  export let data: { data: GroupedEmojiData[] };
 </script>
 
 <Head
@@ -20,4 +14,4 @@
 
 <Header />
 
-<Main hydrate-client={{ data }} />
+<Main hydrate-client={{ data: data.data }} />

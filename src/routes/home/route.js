@@ -7,45 +7,33 @@ module.exports = {
   permalink: ({ request }) => request.slug,
   data: () => {
     const fullEmojiData = [];
-    const searchData = [];
     for (const group in emojiData) {
+      let fullEmojiDataEmojis = [];
+      emojiData[group].forEach((obj) => {
+        const codepoint = twemoji
+          .parse(obj.emoji, { buildUrl: (codepoint) => codepoint })
+          // see https://github.com/twitter/twemoji/issues/405
+          // temp workaround
+          .map((obj) => obj.url)
+          .filter((str) => !!str)
+          .join('-200d-');
+
+        fullEmojiDataEmojis.push({
+          emoji: obj.emoji,
+          slug: obj.slug,
+          codepoint: codepoint.replace(/-/g, ' '),
+          path: `/twemoji/svg/${codepoint}.svg`,
+          keywords: JSON.stringify(emojiKeywords[obj.emoji].concat([codepoint]))
+            .replace(/[\\\[\]'"]/g, '')
+            .replace(/[,_]/g, ' '),
+        });
+      });
+
       fullEmojiData.push({
         group,
-        emojis: emojiData[group].map((obj) => {
-          const codepoint = twemoji
-            .parse(obj.emoji, { buildUrl: (codepoint) => codepoint })
-            // see https://github.com/twitter/twemoji/issues/405
-            // temp workaround
-            .map((obj) => obj.url)
-            .filter((str) => !!str)
-            .join('-200d-');
-          return {
-            emoji: obj.emoji,
-            slug: obj.slug,
-            codepoint: codepoint.replace(/-/g, ' '),
-            path: `/twemoji/svg/${codepoint}.svg`,
-          };
-        }),
+        emojis: fullEmojiDataEmojis,
       });
     }
-    for (const emoji in emojiKeywords) {
-      const codepoint = twemoji
-        .parse(emoji, { buildUrl: (codepoint) => codepoint })
-        // see https://github.com/twitter/twemoji/issues/405
-        // temp workaround
-        .map((obj) => obj.url)
-        .filter((str) => !!str)
-        .join('-200d-');
-      searchData.push({
-        emoji: emoji,
-        keywords: JSON.stringify(emojiKeywords[emoji].concat([codepoint]))
-          .replace(/[\\\[\]'"]/g, '')
-          .replace(/[,_]/g, ' '),
-      });
-    }
-    return {
-      fullEmojiData,
-      searchData,
-    };
+    return { data: fullEmojiData };
   },
 };

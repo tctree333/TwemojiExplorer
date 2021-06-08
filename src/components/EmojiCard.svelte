@@ -65,6 +65,7 @@
 </script>
 
 <style>
+  button.wrapper,
   div {
     isolation: isolate;
     position: relative;
@@ -97,25 +98,26 @@
     left: 0;
     right: 0;
 
-    background-color: transparent;
+    background-color: hsl(210, 90%, 90%);
+    opacity: 90%;
   }
-  button {
+  button.button {
     margin-bottom: 0.5rem;
   }
-  button,
-  a.button {
+  .button {
     display: block;
     width: 100%;
 
     padding: 0.375rem;
 
     font-size: 0.875rem;
-    background-color: hsl(0, 0%, 100%);
+    background-color: hsl(210, 70%, 70%);
     border-radius: 0.4rem;
+    opacity: 99%;
   }
 </style>
 
-<div
+<button
   class="wrapper"
   style={status !== null ? `background-color: ${status ? 'hsl(110, 66%, 81%)' : 'hsl(0, 62%, 90%)'}` : ''}
   on:mouseover={show}
@@ -128,9 +130,9 @@
   <p>{emoji.slug.replace(/_/g, ' ')}</p>
   {#if $currentActive === emoji.slug}
     <div class="actions">
-      <button on:click={copySvg}>Copy SVG</button>
-      <button on:click={copyCodepoint}>Copy Codepoint</button>
+      <button class="button" on:click={copySvg}>Copy SVG</button>
+      <button class="button" on:click={copyCodepoint}>Copy Codepoint</button>
       <a class="button" href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}">Emojipedia</a>
     </div>
   {/if}
-</div>
+</button>

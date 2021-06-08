@@ -8,9 +8,19 @@ export interface EmojiData {
   // unicode_version: string;
   // emoji_version: string;
   // skin_tone_support_unicode_version?: string;
-}
-
-export interface SearchEmojiData {
-  emoji: string;
   keywords: string;
 }
+
+export type GroupedEmojiData = {
+  group: string;
+  emojis: EmojiData[];
+};
+
+// export interface SearchEmojiData {
+//   [key: string]: {
+//     emoji: string;
+//     keywords: string;
+//   }[];
+// }
+
+// export type SearchEmojiResult = { group: string; emojis: { [key: string]: boolean } }[];

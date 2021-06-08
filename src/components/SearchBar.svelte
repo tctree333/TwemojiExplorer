@@ -1,39 +1,50 @@
 <script context="module" lang="ts">
   import type { Writable } from 'svelte/store';
   import { writable } from 'svelte/store';
-  export const displayItems: Writable<{ [key: string]: boolean }> = writable(null);
+  export const displayItems: Writable<GroupedEmojiData[]> = writable(null);
 </script>
 
 <script lang="ts">
-  import type { SearchEmojiData } from 'src/lib/types';
+  import type { EmojiData, GroupedEmojiData } from 'src/lib/types';
   import FlexSearch from 'flexsearch';
+  import type { Index } from 'flexsearch';
 
-  export let searchData: SearchEmojiData[];
+  export let searchData: GroupedEmojiData[];
 
-  const index = FlexSearch.create<{ emoji: string; keywords: string }>({
-    profile: 'match',
-    doc: {
-      id: 'emoji',
-      field: 'keywords',
-    },
+  const index: Record<string, Index<EmojiData>> = {};
+  searchData.forEach(({ group, emojis }) => {
+    (
+      index[group] ||
+      (index[group] = FlexSearch.create({
+        profile: 'match',
+        doc: {
+          id: 'emoji',
+          field: 'keywords',
+        },
+      }))
+    ).add(emojis);
   });
-  index.add(searchData);
+
+  function search(query: string, cb: (res: GroupedEmojiData[]) => void) {
+    const promises = Object.keys(index).map(
+      (key) =>
+        new Promise<GroupedEmojiData>((resolve) => {
+          index[key].search({ query }, (result) => {
+            resolve({ group: key, emojis: result });
+          });
+        }),
+    );
+    Promise.all(promises).then((data) => {
+      cb(data.filter((obj) => obj.emojis.length > 0));
+    });
+  }
 
   let searchstring: string = '';
-  function setResult(result: { [key: string]: boolean }) {
+  function setResult(result: GroupedEmojiData[]) {
     displayItems.set(result);
   }
 
-  $: searchstring
-    ? index.search({ query: searchstring }, (res) => {
-        setResult(
-          res.reduce((acc, curr) => {
-            acc[curr.emoji] = true;
-            return acc;
-          }, {}),
-        );
-      })
-    : setResult(null);
+  $: searchstring ? search(searchstring, setResult) : setResult(null);
 </script>
 
 <style>

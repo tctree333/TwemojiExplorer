@@ -1,24 +1,11 @@
 <script lang="ts">
   import SearchBar, { displayItems } from './SearchBar.svelte';
   import Section from './Section.svelte';
-  import type { EmojiData, SearchEmojiData } from '../lib/types';
+  import type { GroupedEmojiData } from '../lib/types';
 
-  export let data: {
-    fullEmojiData: {
-      group: string;
-      emojis: EmojiData[];
-    }[];
-    searchData: SearchEmojiData[];
-  };
+  export let data: GroupedEmojiData[];
 
-  $: emojiData = !$displayItems
-    ? data.fullEmojiData
-    : data.fullEmojiData
-        .map((group) => ({
-          ...group,
-          emojis: group.emojis.filter((emoji) => $displayItems[emoji.emoji] !== undefined),
-        }))
-        .filter((group) => group.emojis.length > 0);
+  $: emojiData = $displayItems || data;
 </script>
 
 <style>
@@ -51,8 +38,7 @@
 </style>
 
 <main>
-  <SearchBar searchData={data.searchData} />
-
+  <SearchBar searchData={data} />
   <div>
     {#each emojiData as group}
       <Section title={group.group} emojis={group.emojis} />
