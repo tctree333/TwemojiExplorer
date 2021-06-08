@@ -12,7 +12,7 @@
 
     padding: 4rem 1rem;
     width: 100%;
-    background-color: hsl(0, 0% 95%);
+    background-color: hsl(0, 0%, 95%);
 
     font-size: 1.25rem;
   }
