@@ -79,7 +79,8 @@
     padding-top: 1rem;
 
     text-align: center;
-    background-color: hsl(0, 0%, 90%);
+    background-color: hsl(0, 0%, 99%);
+    border: 1px solid hsl(0, 0%, 70%);
     border-radius: 0.5rem;
   }
   img {
