@@ -39,7 +39,7 @@
 
 <main>
   <SearchBar searchData={data} />
-  <div>
+  <div tabindex="-1">
     {#each emojiData as group}
       <Section title={group.group} emojis={group.emojis} />
     {:else}

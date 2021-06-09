@@ -6,11 +6,16 @@
 </script>
 
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
 
   import type { EmojiData } from '../lib/types';
 
   export let emoji: EmojiData;
+
+  let noJSAnchor: HTMLAnchorElement;
+  onMount(() => {
+    noJSAnchor.tabIndex = -1;
+  });
 
   let status: boolean = null;
   let timeoutHandle: NodeJS.Timeout;
@@ -59,7 +64,15 @@
     clearTimeout(timeoutHandle);
   });
 
-  function show() {
+  function showActions() {
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      currentActive.set(emoji.slug);
+    }
+  }
+  function hideActions() {
+    currentActive.set(null);
+  }
+  function click() {
     currentActive.set(emoji.slug);
   }
 </script>
@@ -97,8 +110,7 @@
     left: 0;
     right: 0;
 
-    background-color: hsl(210, 90%, 90%);
-    opacity: 90%;
+    background-color: hsla(210, 90%, 90%, 70%);
   }
   button.button {
     margin-bottom: 0.5rem;
@@ -112,26 +124,41 @@
     font-size: 0.875rem;
     background-color: hsl(210, 70%, 70%);
     border-radius: 0.4rem;
-    opacity: 99%;
+    opacity: 80%;
+  }
+  button,
+  .button {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  button:focus-visible,
+  .button:focus-visible {
+    box-shadow: 0 0 0 2px hsl(213, 93%, 63%);
   }
 </style>
 
 <button
   class="wrapper"
   style={status !== null ? `background-color: ${status ? 'hsl(110, 66%, 81%)' : 'hsl(0, 62%, 90%)'}` : ''}
-  on:mouseover={show}
-  on:mouseleave={() => {
-    currentActive.set(null);
-  }}
-  on:click={show}>
-  <a href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}"
+  on:mouseover={showActions}
+  on:mouseleave={hideActions}
+  on:click={click}>
+  <a
+    bind:this={noJSAnchor}
+    on:click={(e) => {
+      e.preventDefault();
+    }}
+    target="_blank"
+    rel="noopener"
+    href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}"
     ><img alt={emoji.emoji} src={emoji.path} width="42" height="42" loading="lazy" /></a>
   <p>{emoji.slug.replace(/_/g, ' ')}</p>
   {#if $currentActive === emoji.slug}
     <div class="actions">
       <button class="button" on:click={copySvg}>Copy SVG</button>
       <button class="button" on:click={copyCodepoint}>Copy Codepoint</button>
-      <a class="button" href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}">Emojipedia</a>
+      <a target="_blank" rel="noopener" class="button" href="https://emojipedia.org/{emoji.slug.replace(/_/g, '-')}"
+        >Emojipedia</a>
     </div>
   {/if}
 </button>
