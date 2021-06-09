@@ -133,7 +133,7 @@
   }
   button:focus-visible,
   .button:focus-visible {
-    box-shadow: 0 0 0 2px hsl(213, 93%, 63%);
+    box-shadow: 0 0 0 4px hsl(213, 89%, 47%);
   }
 </style>
 
