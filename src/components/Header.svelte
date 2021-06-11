@@ -1,5 +1,6 @@
 <style>
   header {
+    flex-shrink: 0;
     background-image: linear-gradient(to bottom right, hsl(180, 80%, 50%), hsl(195, 100%, 50%));
     overflow: hidden;
   }
@@ -77,7 +78,7 @@
       ><path
         d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" /></svg>
     <div class="inner">
-      <h1>Twemoji Explorer</h1>
+      <h1><a href="/">Twemoji Explorer</a></h1>
       <span>
         <svg class="globe" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36"
           ><circle fill="#88C9F9" cx="18" cy="18" r="18" /><path

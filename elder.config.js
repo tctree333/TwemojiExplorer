@@ -22,6 +22,14 @@ module.exports = {
       // this reloads your browser when nodemon restarts your server.
       port: 8080,
     },
+    '@elderjs/plugin-images': {
+      folders: [
+        {
+          src: '/src/assets/images/*', // glob of where your original images are. Relative to rootDir/process.cwd() defined in your elder.config.js. Careful with **.
+          output: '/images/', // where files should be put within the distDir defined in your elder.config.js.
+        },
+      ],
+    },
     // '@elderjs/plugin-seo-check': {
     //   display: ['errors', 'warnings'], // If the errors are too verbose remove 'warnings'
     //   //writeLocation: './report.json', // if you want to write a report of errors

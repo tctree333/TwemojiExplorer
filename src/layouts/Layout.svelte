@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Header from '../components/Header.svelte';
   import '../assets/reset.css';
   export let templateHtml: string;
 </script>
@@ -22,9 +23,20 @@
   a {
     text-decoration: underline;
   }
+  :global(body) {
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    flex: 1;
+  }
 </style>
 
-{@html templateHtml}
+<Header />
+
+<main>
+  {@html templateHtml}
+</main>
 
 <footer>
   <p>A web project by <a href="https://tomichen.com">Tomi Chen.</a></p>

@@ -12,14 +12,13 @@
   export let pageImage: PageImage | undefined = undefined;
   export let canonical: string | undefined = undefined;
 
-  export let path: string;
+  export let path: string = undefined;
 
   import elderConfig from '../../elder.config';
   const { origin: host } = elderConfig;
 
-  let url = canonical;
-  if (!canonical) {
-    url = fullUrl(path);
+  if (canonical === undefined && path !== undefined) {
+    canonical = fullUrl(path);
   }
 
   function fullUrl(value: string) {
@@ -47,7 +46,12 @@
 
   <title>{title}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href={url} />
+
+  {#if canonical}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:url" content={canonical} />
+  {/if}
 
   <!-- Allow search engines to crawl certain pages -->
   {#if index === false}
@@ -63,12 +67,10 @@
   <meta property="og:description" content={description} />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content={url} />
 
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:domain" content="funwithmeth.com" />
-  <meta name="twitter:url" content={url} />
 
   {#if pageImage}
     <meta name="twitter:card" content="summary_large_image" />
