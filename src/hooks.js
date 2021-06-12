@@ -25,5 +25,14 @@ const hooks = [
       });
     },
   },
+  {
+    hook: 'buildComplete',
+    name: 'rename 404 file',
+    description: 'renames the 404 file in /404/index.html to /404.html',
+    run: () => {
+      fs.renameSync('public/404/index.html', 'public/404.html');
+      fs.rmdirSync('public/404');
+    },
+  },
 ];
 module.exports = hooks;
