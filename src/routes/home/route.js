@@ -23,7 +23,12 @@ module.exports = {
           slug: obj.slug,
           codepoint: codepoint.replace(/-/g, ' '),
           path: `/twemoji/svg/${codepoint}.svg`,
-          keywords: JSON.stringify(emojiKeywords[obj.emoji].concat([codepoint]))
+          keywords: JSON.stringify(
+            emojiKeywords[obj.emoji].concat(
+              [codepoint, obj.unicode_version, obj.emoji_version],
+              obj.skin_tone_support ? ['skin-tone-support'] : [],
+            ),
+          )
             .replace(/[\\\[\]'"]/g, '')
             .replace(/[,_]/g, ' '),
         });
