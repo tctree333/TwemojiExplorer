@@ -1,0 +1,4 @@
+[[redirects]]
+from = "/twemoji/*"
+status = 200
+to = "https://twemoji.maxcdn.com/v/14.0.2/:splat"
