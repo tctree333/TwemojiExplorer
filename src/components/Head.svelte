@@ -30,7 +30,7 @@
     if (value === root || value === root + '/') {
       value = root;
     } else {
-      value = value.endsWith('/') ? value : value + '/';
+      value = value.endsWith('/') || value.split('/').slice(-1)[0].includes('.') ? value : value + '/';
     }
     return value;
   }

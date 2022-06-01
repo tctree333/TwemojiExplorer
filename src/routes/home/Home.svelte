@@ -9,6 +9,7 @@
 <Head
   title="Twemoji Explorer"
   description="Twemoji Explorer lets you explore Twitter's Twemoji, for use in other projects."
-  path="/" />
+  path="/"
+  pageImage={{ url: '/twemoji-social.png', type: 'image/png', alt: 'twemoji explorer social card' }} />
 
 <Main hydrate-client={{ data: data.data }} />
